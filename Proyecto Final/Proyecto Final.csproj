@@ -66,6 +66,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="InterfazLibroAgendas.resx">
+      <DependentUpon>InterfazLibroAgendas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InterfazSesion.resx">
       <DependentUpon>InterfazSesion.cs</DependentUpon>
     </EmbeddedResource>
