@@ -65,6 +65,7 @@
             this.BtnRegistrar.TabIndex = 2;
             this.BtnRegistrar.Text = "Registrar";
             this.BtnRegistrar.UseVisualStyleBackColor = true;
+            this.BtnRegistrar.Click += new System.EventHandler(this.BtnRegistrar_Click);
             // 
             // label2
             // 
@@ -182,6 +183,7 @@
             this.BtnIngresar.TabIndex = 2;
             this.BtnIngresar.Text = "Iniciar Sesión";
             this.BtnIngresar.UseVisualStyleBackColor = true;
+            this.BtnIngresar.Click += new System.EventHandler(this.BtnIngresar_Click);
             // 
             // txtUENombre
             // 
@@ -218,6 +220,7 @@
             this.BtnCancelar.TabIndex = 13;
             this.BtnCancelar.Text = "Cancelar";
             this.BtnCancelar.UseVisualStyleBackColor = true;
+            this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
             // InterfazSesion
             // 

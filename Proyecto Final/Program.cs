@@ -16,9 +16,7 @@ namespace Proyecto_Final
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new InterfazRealizarAgenda());
-            Application.Run(new InterfazLibroAgendas());
-            Application.Run(new InterfazSesion());
+            Application.Run(new InterfazPrincipal());
         }
     }
 }
