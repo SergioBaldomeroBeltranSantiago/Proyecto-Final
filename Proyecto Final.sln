@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proyecto Final", "Proyecto Final\Proyecto Final.csproj", "{5D841939-A2E0-4931-B055-CC0DC6FC65E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface", "Proyecto Final\Interface.csproj", "{5D841939-A2E0-4931-B055-CC0DC6FC65E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cerebro", "Cerebro\Cerebro.csproj", "{A0E80AE0-AD6E-48EA-A9AB-4F7411C5F996}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMaster", "DataMaster\DataMaster.csproj", "{808B4813-0698-4897-85E1-D946B43F46E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{5D841939-A2E0-4931-B055-CC0DC6FC65E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D841939-A2E0-4931-B055-CC0DC6FC65E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D841939-A2E0-4931-B055-CC0DC6FC65E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0E80AE0-AD6E-48EA-A9AB-4F7411C5F996}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0E80AE0-AD6E-48EA-A9AB-4F7411C5F996}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0E80AE0-AD6E-48EA-A9AB-4F7411C5F996}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0E80AE0-AD6E-48EA-A9AB-4F7411C5F996}.Release|Any CPU.Build.0 = Release|Any CPU
+		{808B4813-0698-4897-85E1-D946B43F46E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{808B4813-0698-4897-85E1-D946B43F46E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{808B4813-0698-4897-85E1-D946B43F46E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{808B4813-0698-4897-85E1-D946B43F46E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
