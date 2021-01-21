@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Proyecto_Final
+namespace Interface
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace Proyecto_Final
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Interface_Login());
+            Application.Run(new Interfaz_Login());
         }
     }
 }
