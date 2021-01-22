@@ -23,6 +23,7 @@ namespace Interface
         Conexion conectasion = new Conexion();
         public Usuario usuario_actual = new Usuario();
         public Interfaz_Principal regresar_pantalla;
+        public Interfaz_Login cuenta_eliminada;
         bool CambioCorreo = false, CorreoValido = false, CambioNombre = false, CambioContraseña = false, ContraseñaValida = false, MismaContraseña = false;
 
         private void Btn_Regresar_Click(object sender, EventArgs e)
@@ -190,13 +191,28 @@ namespace Interface
                     conectasion.Open();
                     string sql = "DELETE FROM proyecto.usuarios WHERE correo_electronico = '" + usuario_actual.getCorreo_electronico() + "'";
                     MySqlDataReader borrador = conectasion.ExecuteReader(sql);
-                    while (borrador.Read())
+                    if (borrador != null)
                     {
+                        while (borrador.Read())
+                        {
 
+                        }
+                        MessageBox.Show("Borrado exitoso, ahora se le redirigira a la pantalla de inicio de sesion.");
+                        string sqltwo = "DELETE FROM proyecto.reservaciones WHERE correo_e_usuario = '" + usuario_actual.getCorreo_electronico() + "'";
+                        conectasion.Close();
+                        conectasion.Open();
+                        borrador = conectasion.ExecuteReader(sqltwo);
+                        if (borrador != null) {
+                            MessageBox.Show("Reservaciones a nombre de la cuenta recientemente borrada han sido eliminadas.");
+                        }
+                    }
+                    else {
+                        MessageBox.Show("Error en el intento de borrado, se le redirigira a la pantalla de inicio de sesion.");
                     }
                     conectasion.Close();
-                    MessageBox.Show("Borrado exitoso, ahora la aplicacion se reiniciara.");
-                    Application.Restart();
+                    cuenta_eliminada.Visible = true;
+                    regresar_pantalla.Dispose();
+                    this.Dispose();
                 }
                 catch (NullReferenceException ex)
                 {
@@ -211,7 +227,7 @@ namespace Interface
 
         private void Btn_ActualizarCuenta_Click(object sender, EventArgs e)
         {
-            DialogResult seguridad = MessageBox.Show("¿Esta seguro de querer modificar su cuenta?\nEste es un proceso irreversible.", "Modificar cuenta", MessageBoxButtons.YesNo);
+            DialogResult seguridad = MessageBox.Show("¿Esta seguro de querer modificar su cuenta?", "Modificar cuenta", MessageBoxButtons.YesNo);
             if (seguridad == DialogResult.Yes)
             {
                 try
@@ -222,13 +238,38 @@ namespace Interface
                     string nuevacontraseña = (CambioContraseña && MismaContraseña) ? Txt_NuevaContraOne.Text : usuario_actual.getContraseña();
                     string sql = "UPDATE proyecto.usuarios SET correo_electronico='" + nuevocorreo + "' ,nombre_usuario = '" + nuevonombre + "' , contraseña = '" + nuevacontraseña + "' WHERE correo_electronico = '" + usuario_actual.getCorreo_electronico() + "'";
                     MySqlDataReader modificador = conectasion.ExecuteReader(sql);
-                    while (modificador.Read())
-                    {
 
+                    if (modificador != null)
+                    {
+                        while (modificador.Read())
+                        {
+
+                        }
+                        MessageBox.Show("Modificacion exitosa, ahora se le regresara a la pantalla principal.");
+                        if (CambioCorreo) {
+                            conectasion.Close();
+                            conectasion.Open();
+                            string sqltwo = "UPDATE proyecto.reservaciones SET correo_e_usuario = '" + nuevocorreo + "' WHERE correo_e_usuario ='" + usuario_actual.getCorreo_electronico() + "'";
+                            modificador = conectasion.ExecuteReader(sqltwo);
+                            if (modificador != null)
+                            {
+                                MessageBox.Show("Se han actualizado las reservaciones.");
+                            }
+                            else {
+                                MessageBox.Show("Error en la actualizacion de las reservaciones, contacte con un administrador.");
+                            }
+                        }
+                        conectasion.Close();
+                        regresar_pantalla.usuario_conectado = new Usuario();
+                        usuario_actual = new Usuario(nuevocorreo, nuevonombre, nuevacontraseña, usuario_actual.isAdmin());
+                        regresar_pantalla.usuario_conectado = usuario_actual;
+                    }
+                    else {
+                        MessageBox.Show("Error en la modificacion, se le regresara a la pantalla principal");
                     }
                     conectasion.Close();
-                    MessageBox.Show("Modificacion exitosa, ahora la aplicacion se reiniciara.");
-                    Application.Restart();
+                    regresar_pantalla.Visible = true;
+                    this.Dispose();
                 }
                 catch (NullReferenceException ex)
                 {

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="proyectoDataSet" targetNamespace="http://tempuri.org/proyectoDataSet.xsd" xmlns:mstns="http://tempuri.org/proyectoDataSet.xsd" xmlns="http://tempuri.org/proyectoDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="proyectoConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="proyectoConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Interface.Properties.Settings.GlobalReference.Default.proyectoConnectionString" Provider="MySql.Data.MySqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="reservacionesTableAdapter" GeneratorDataComponentClassName="reservacionesTableAdapter" Name="reservaciones" UserDataComponentName="reservacionesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="proyectoConnectionString (Settings)" DbObjectName="proyecto.reservaciones" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT `id`, `num_hab`, `correo_e_usuario`, `inicio_reservacion`, `fin_reservacion`, `costo_reservacion` FROM `reservaciones`</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings />
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="proyectoDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="proyectoDataSet" msprop:Generator_UserDSName="proyectoDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="reservaciones" msprop:Generator_TableClassName="reservacionesDataTable" msprop:Generator_TableVarName="tablereservaciones" msprop:Generator_RowChangedName="reservacionesRowChanged" msprop:Generator_TablePropName="reservaciones" msprop:Generator_RowDeletingName="reservacionesRowDeleting" msprop:Generator_RowChangingName="reservacionesRowChanging" msprop:Generator_RowEvHandlerName="reservacionesRowChangeEventHandler" msprop:Generator_RowDeletedName="reservacionesRowDeleted" msprop:Generator_RowClassName="reservacionesRow" msprop:Generator_UserTableName="reservaciones" msprop:Generator_RowEvArgName="reservacionesRowChangeEvent">
+          <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
