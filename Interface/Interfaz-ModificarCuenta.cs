@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Funciones;
 using Datos;
+using MySql.Data.MySqlClient;
 
 namespace Interface
 {
@@ -19,13 +20,225 @@ namespace Interface
             InitializeComponent();
         }
 
-        public Usuario usuario_actual;
+        Conexion conectasion = new Conexion();
+        public Usuario usuario_actual = new Usuario();
         public Interfaz_Principal regresar_pantalla;
+        bool CambioCorreo = false, CorreoValido = false, CambioNombre = false, CambioContraseña = false, ContraseñaValida = false, MismaContraseña = false;
 
         private void Btn_Regresar_Click(object sender, EventArgs e)
         {
             regresar_pantalla.Visible = true;
             this.Dispose();
+        }
+
+        private void Txt_NombreUsuario_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (Txt_NombreUsuario.Text != "" && Txt_NombreUsuario.Text != usuario_actual.getNombre_usuario())
+            {
+                Lb_Nombre.Text = "Nuevo nombre aceptado.";
+                Lb_Nombre.ForeColor = Color.Green;
+                CambioNombre = true;
+            }
+            else
+            {
+                Lb_Nombre.Text = "";
+                CambioNombre = false;
+            }
+            UnlockChange();
+        }
+
+        private void Txt_CorreoE_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (Txt_CorreoE.Text != "" && Txt_CorreoE.Text != usuario_actual.getCorreo_electronico())
+            {
+                if (Cerebro.ValidarFormatoCorreo(Txt_CorreoE.Text))
+                {
+                    Lb_Correo.Text = "Nuevo correo valido y aceptado.";
+                    Lb_Correo.ForeColor = Color.Green;
+                    CambioCorreo = CorreoValido = true;
+                }
+                else
+                {
+                    Lb_Correo.Text = "Nuevo correo invalido.";
+                    Lb_Correo.ForeColor = Color.Red;
+                    CorreoValido = false;
+                    CambioCorreo = true;
+                }
+            }
+            else
+            {
+                Lb_Correo.Text = "";
+                CambioCorreo = false;
+            }
+            UnlockChange();
+        }
+
+        private void Txt_NuevaContraOne_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (Txt_NuevaContraOne.Text != "")
+            {
+                if (Cerebro.ValidarFormatoContraseña(Txt_NuevaContraOne.Text))
+                {
+                    Lb_ContraOne.Text = "Nueva contraseña valida.";
+                    Lb_ContraOne.ForeColor = Color.Green;
+                    CambioContraseña = ContraseñaValida = true;
+                }
+                else
+                {
+                    Lb_ContraOne.Text = "Nueva contraseña invalida.";
+                    Lb_ContraOne.ForeColor = Color.Red;
+                    ContraseñaValida = false;
+                    CambioContraseña = true;
+                }
+            }
+            else
+            {
+                Lb_ContraOne.Text = "";
+                Lb_MismaContra.Text = "";
+                CambioContraseña = false;
+            }
+            UnlockChange();
+            SamePassword();
+        }
+
+        private void Txt_NuevaContraTwo_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (Txt_NuevaContraTwo.Text != "")
+            {
+                if (Cerebro.ValidarFormatoContraseña(Txt_NuevaContraTwo.Text))
+                {
+                    Lb_ContraTwo.Text = "Nueva contraseña valida.";
+                    Lb_ContraTwo.ForeColor = Color.Green;
+                    CambioContraseña = ContraseñaValida = true;
+                }
+                else
+                {
+                    Lb_ContraTwo.Text = "Nueva contraseña invalida.";
+                    Lb_ContraTwo.ForeColor = Color.Red;
+                    ContraseñaValida = false;
+                    CambioContraseña = true;
+                }
+            }
+            else
+            {
+                Lb_ContraTwo.Text = "";
+                Lb_MismaContra.Text = "";
+                CambioContraseña = false;
+            }
+            UnlockChange();
+            SamePassword();
+        }
+
+        private void Txt_Contraseña_KeyUp(object sender, KeyEventArgs e)
+        {
+            UnlockDeletion();
+            UnlockChange();
+        }
+
+        private void UnlockDeletion()
+        {
+            if (Txt_Contraseña.Text.Equals(usuario_actual.getContraseña()))
+            {
+                Btn_EliminarCuenta.Enabled = true;
+            }
+            else
+            {
+                Btn_EliminarCuenta.Enabled = false;
+            }
+        }
+
+        private void UnlockChange()
+        {
+            if (Txt_Contraseña.Text.Equals(usuario_actual.getContraseña()) && (CambioNombre || (CambioCorreo && CorreoValido) || (CambioContraseña && ContraseñaValida && MismaContraseña)))
+            {
+                Btn_ActualizarCuenta.Enabled = true;
+            }
+            else
+            {
+                Btn_ActualizarCuenta.Enabled = false;
+            }
+        }
+
+        private void Interfaz_ModificarCuenta_Load(object sender, EventArgs e)
+        {
+            Txt_NombreUsuario.Text = usuario_actual.getNombre_usuario();
+            Txt_CorreoE.Text = usuario_actual.getCorreo_electronico();
+        }
+
+        private void SamePassword()
+        {
+            if (ContraseñaValida && Txt_NuevaContraOne.Text.Equals(Txt_NuevaContraTwo.Text))
+            {
+                MismaContraseña = true;
+                Lb_MismaContra.Text = "Ambas contraseñas son correctas.";
+                Lb_MismaContra.ForeColor = Color.Green;
+            }
+            else
+            {
+                MismaContraseña = false;
+                Lb_MismaContra.Text = "Las contraseñas no coinciden.";
+                Lb_MismaContra.ForeColor = Color.Red;
+            }
+        }
+        private void Btn_EliminarCuenta_Click(object sender, EventArgs e)
+        {
+            DialogResult seguridad = MessageBox.Show("¿Esta seguro de querer eliminar su cuenta?\nEste es un proceso irreversible.", "Borrar cuenta", MessageBoxButtons.YesNo);
+            if (seguridad == DialogResult.Yes)
+            {
+                try
+                {
+                    conectasion.Open();
+                    string sql = "DELETE FROM proyecto.usuarios WHERE correo_electronico = '" + usuario_actual.getCorreo_electronico() + "'";
+                    MySqlDataReader borrador = conectasion.ExecuteReader(sql);
+                    while (borrador.Read())
+                    {
+
+                    }
+                    conectasion.Close();
+                    MessageBox.Show("Borrado exitoso, ahora la aplicacion se reiniciara.");
+                    Application.Restart();
+                }
+                catch (NullReferenceException ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
+
+        private void Btn_ActualizarCuenta_Click(object sender, EventArgs e)
+        {
+            DialogResult seguridad = MessageBox.Show("¿Esta seguro de querer modificar su cuenta?\nEste es un proceso irreversible.", "Modificar cuenta", MessageBoxButtons.YesNo);
+            if (seguridad == DialogResult.Yes)
+            {
+                try
+                {
+                    conectasion.Open();
+                    string nuevocorreo = CambioCorreo ? Txt_CorreoE.Text : usuario_actual.getCorreo_electronico();
+                    string nuevonombre = CambioNombre ? Txt_NombreUsuario.Text : usuario_actual.getNombre_usuario();
+                    string nuevacontraseña = (CambioContraseña && MismaContraseña) ? Txt_NuevaContraOne.Text : usuario_actual.getContraseña();
+                    string sql = "UPDATE proyecto.usuarios SET correo_electronico='" + nuevocorreo + "' ,nombre_usuario = '" + nuevonombre + "' , contraseña = '" + nuevacontraseña + "' WHERE correo_electronico = '" + usuario_actual.getCorreo_electronico() + "'";
+                    MySqlDataReader modificador = conectasion.ExecuteReader(sql);
+                    while (modificador.Read())
+                    {
+
+                    }
+                    conectasion.Close();
+                    MessageBox.Show("Modificacion exitosa, ahora la aplicacion se reiniciara.");
+                    Application.Restart();
+                }
+                catch (NullReferenceException ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
         }
     }
 }

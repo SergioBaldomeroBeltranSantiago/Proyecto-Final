@@ -106,6 +106,7 @@ namespace Interface
             // 
             this.Txt_NuevaContraseñaOne.Location = new System.Drawing.Point(201, 163);
             this.Txt_NuevaContraseñaOne.Name = "Txt_NuevaContraseñaOne";
+            this.Txt_NuevaContraseñaOne.PasswordChar = '*';
             this.Txt_NuevaContraseñaOne.Size = new System.Drawing.Size(100, 20);
             this.Txt_NuevaContraseñaOne.TabIndex = 7;
             this.Txt_NuevaContraseñaOne.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Txt_NuevaContraseñaOne_KeyUp);
@@ -123,6 +124,7 @@ namespace Interface
             // 
             this.Txt_NuevaContraseñaTwo.Location = new System.Drawing.Point(201, 200);
             this.Txt_NuevaContraseñaTwo.Name = "Txt_NuevaContraseñaTwo";
+            this.Txt_NuevaContraseñaTwo.PasswordChar = '*';
             this.Txt_NuevaContraseñaTwo.Size = new System.Drawing.Size(100, 20);
             this.Txt_NuevaContraseñaTwo.TabIndex = 9;
             this.Txt_NuevaContraseñaTwo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Txt_NuevaContraseñaTwo_KeyUp);

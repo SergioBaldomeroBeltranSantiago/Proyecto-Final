@@ -82,6 +82,7 @@ namespace Interface
             // 
             this.Txt_Contraseña.Location = new System.Drawing.Point(359, 177);
             this.Txt_Contraseña.Name = "Txt_Contraseña";
+            this.Txt_Contraseña.PasswordChar = '*';
             this.Txt_Contraseña.Size = new System.Drawing.Size(121, 20);
             this.Txt_Contraseña.TabIndex = 4;
             this.Txt_Contraseña.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Txt_Contraseña_KeyUp);

@@ -41,6 +41,7 @@ namespace Interface
                     }
                     login_exitoso.cerrar_sesion = this;
                     login_exitoso.lb_NombreUsuario.Text = row["nombre_usuario"].ToString();
+                    Txt_CorreoE.Text = Txt_Contraseña.Text = "";
                     this.Visible = false;
                 }
                 else {

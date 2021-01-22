@@ -23,19 +23,19 @@ namespace Funciones
             this.admin_status = admin_s;
         }
 
-        private string getCorreo_electronico() {
+        public string getCorreo_electronico() {
             return this.correo_electronico;
         }
 
-        private string getNombre_usuario() {
+        public string getNombre_usuario() {
             return this.nombre_usuario;
         }
 
-        private string getContraseña() {
+        public string getContraseña() {
             return this.contraseña;
         }
 
-        private bool isAdmin() {
+        public bool isAdmin() {
             return this.admin_status;
         }
     }
