@@ -64,6 +64,12 @@
     <Compile Include="Interfaz-Login.Designer.cs">
       <DependentUpon>Interfaz-Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaz-ModificarCuenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfaz-ModificarCuenta.Designer.cs">
+      <DependentUpon>Interfaz-ModificarCuenta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interfaz-Principal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +89,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz-Login.resx">
       <DependentUpon>Interfaz-Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Interfaz-ModificarCuenta.resx">
+      <DependentUpon>Interfaz-ModificarCuenta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interfaz-Principal.resx">
       <DependentUpon>Interfaz-Principal.cs</DependentUpon>

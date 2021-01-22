@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Funciones
 {
@@ -16,7 +17,7 @@ namespace Funciones
         }
 
         public static bool ValidarFormatoContraseña(string contraseña) {
-            Regex validar = new Regex(@"^.{8,}$");
+            Regex validar = new Regex(@".{8,}");
             return validar.IsMatch(contraseña);
         }
     }

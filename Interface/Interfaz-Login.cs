@@ -22,57 +22,34 @@ namespace Interface
         }
 
         Conexion conectar = new Conexion();
+        bool CorreoValido = false, ContraseñaValida = false;
 
         private void Btn_InicioSesion_Click(object sender, EventArgs e)
         {
-            if (!Txt_Contraseña.Text.Equals("") && !Txt_CorreoE.Text.Equals(""))
+            try
             {
-
-                if (Cerebro.ValidarFormatoCorreo(Txt_CorreoE.Text) && Cerebro.ValidarFormatoContraseña(Txt_Contraseña.Text))
+                conectar.Open();
+                string sqlquery = "SELECT * FROM Usuarios WHERE correo_electronico ='" + Txt_CorreoE.Text + "' AND contraseña ='" + Txt_Contraseña.Text + "'";
+                MySqlDataReader row = conectar.ExecuteReader(sqlquery);
+                if (row.HasRows)
                 {
-                    try
+                    Interfaz_Principal login_exitoso = new Interfaz_Principal();
+                    login_exitoso.Show();
+                    while (row.Read())
                     {
-                        conectar.Open();
-                        string sqlquery = "SELECT * FROM Usuarios WHERE correo_electronico ='" + Txt_CorreoE.Text + "' AND contraseña ='" + Txt_Contraseña.Text + "'";
-                        MySqlDataReader row = conectar.ExecuteReader(sqlquery);
-                        if (row.HasRows)
-                        {
-                            Interfaz_Principal login_exitoso = new Interfaz_Principal();
-                            login_exitoso.Show();
-                            while (row.Read()) {
-                                login_exitoso.usuario_conectado = new Usuario(row["correo_electronico"].ToString(), row["nombre_usuario"].ToString(), row["contraseña"].ToString(), Convert.ToBoolean(row["adminstatus"]));
-                            }
-                            login_exitoso.cerrar_sesion = this;
-                            this.Visible = false;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Error de identificación, favor de verificar datos.");
-                        }
+                        login_exitoso.usuario_conectado = new Usuario(row["correo_electronico"].ToString(), row["nombre_usuario"].ToString(), row["contraseña"].ToString(), Convert.ToBoolean(row["adminstatus"]));
                     }
-                    catch (NullReferenceException ex) {
-                        MessageBox.Show("Error de identificación, favor de verificar datos."+ex.Message);
-                    }
+                    login_exitoso.cerrar_sesion = this;
+                    login_exitoso.lb_NombreUsuario.Text = row["nombre_usuario"].ToString();
+                    this.Visible = false;
                 }
-                else
-                {
-                    if (!Cerebro.ValidarFormatoCorreo(Txt_CorreoE.Text) && !Cerebro.ValidarFormatoContraseña(Txt_Contraseña.Text))
-                    {
-                        MessageBox.Show("Correo electronico y contraseña no validos.");
-                    }
-                    else if (!Cerebro.ValidarFormatoCorreo(Txt_CorreoE.Text))
-                    {
-                        MessageBox.Show("Direccion de correo electronico invalida.");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Contraseña invalida, debe contener al menos 8 caracteres.");
-                    }
+                else {
+                    MessageBox.Show("Usuario no existente o contraseña incorrecta, favor de verificar los datos");
                 }
             }
-            else
+            catch (NullReferenceException ex)
             {
-                MessageBox.Show("Debe llenar los campos de correo electronico y contraseña antes de continuar.");
+                MessageBox.Show("Base de datos vacia." + ex.Message);
             }
         }
 
@@ -87,6 +64,64 @@ namespace Interface
         private void Btn_Cerrar_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void Txt_CorreoE_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (Txt_CorreoE.Text != "")
+            {
+                CorreoValido = Cerebro.ValidarFormatoCorreo(Txt_CorreoE.Text);
+                if (CorreoValido)
+                {
+                    Lb_Correo.Text = "Formato de correo valido.";
+                    Lb_Correo.ForeColor = Color.Green;
+                }
+                else
+                {
+                    Lb_Correo.Text = "Formato de correo invalido.";
+                    Lb_Correo.ForeColor = Color.Red;
+                }
+                UnlockButton();
+            }
+            else
+            {
+                Lb_Correo.Text = "";
+            }
+        }
+
+        private void Txt_Contraseña_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (Txt_Contraseña.Text != "")
+            {
+                ContraseñaValida = Cerebro.ValidarFormatoContraseña(Txt_Contraseña.Text);
+                if (ContraseñaValida)
+                {
+                    Lb_Contraseña.Text = "Formato de contraseña valido.";
+                    Lb_Contraseña.ForeColor = Color.Green;
+                }
+                else
+                {
+                    Lb_Contraseña.Text = "Formato de contraseña invalido.";
+                    Lb_Contraseña.ForeColor = Color.Red;
+                }
+                UnlockButton();
+            }
+            else
+            {
+                Lb_Contraseña.Text = "";
+            }
+        }
+
+        private void UnlockButton()
+        {
+            if (CorreoValido && ContraseñaValida)
+            {
+                Btn_InicioSesion.Enabled = true;
+            }
+            else
+            {
+                Btn_InicioSesion.Enabled = false;
+            }
         }
     }
 }

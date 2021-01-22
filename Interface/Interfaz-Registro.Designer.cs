@@ -41,11 +41,15 @@ namespace Interface
             this.label4 = new System.Windows.Forms.Label();
             this.Txt_CodigoAdmin = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.Btn_Cerrar = new System.Windows.Forms.Button();
+            this.Lb_Correo = new System.Windows.Forms.Label();
+            this.Lb_ContraseñaOne = new System.Windows.Forms.Label();
+            this.Lb_ContraseñaTwo = new System.Windows.Forms.Label();
+            this.Lb_MismaContraseña = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Btn_IniciarRegistro
             // 
+            this.Btn_IniciarRegistro.Enabled = false;
             this.Btn_IniciarRegistro.Location = new System.Drawing.Point(44, 356);
             this.Btn_IniciarRegistro.Name = "Btn_IniciarRegistro";
             this.Btn_IniciarRegistro.Size = new System.Drawing.Size(75, 23);
@@ -69,6 +73,7 @@ namespace Interface
             this.Txt_NuevoCorreo.Name = "Txt_NuevoCorreo";
             this.Txt_NuevoCorreo.Size = new System.Drawing.Size(100, 20);
             this.Txt_NuevoCorreo.TabIndex = 2;
+            this.Txt_NuevoCorreo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Txt_NuevoCorreo_KeyUp);
             // 
             // Btn_Cancelar
             // 
@@ -86,6 +91,7 @@ namespace Interface
             this.Txt_NuevoNombre.Name = "Txt_NuevoNombre";
             this.Txt_NuevoNombre.Size = new System.Drawing.Size(100, 20);
             this.Txt_NuevoNombre.TabIndex = 5;
+            this.Txt_NuevoNombre.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Txt_NuevoNombre_KeyUp);
             // 
             // label2
             // 
@@ -102,6 +108,7 @@ namespace Interface
             this.Txt_NuevaContraseñaOne.Name = "Txt_NuevaContraseñaOne";
             this.Txt_NuevaContraseñaOne.Size = new System.Drawing.Size(100, 20);
             this.Txt_NuevaContraseñaOne.TabIndex = 7;
+            this.Txt_NuevaContraseñaOne.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Txt_NuevaContraseñaOne_KeyUp);
             // 
             // label3
             // 
@@ -118,6 +125,7 @@ namespace Interface
             this.Txt_NuevaContraseñaTwo.Name = "Txt_NuevaContraseñaTwo";
             this.Txt_NuevaContraseñaTwo.Size = new System.Drawing.Size(100, 20);
             this.Txt_NuevaContraseñaTwo.TabIndex = 9;
+            this.Txt_NuevaContraseñaTwo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Txt_NuevaContraseñaTwo_KeyUp);
             // 
             // label4
             // 
@@ -144,15 +152,37 @@ namespace Interface
             this.label5.TabIndex = 10;
             this.label5.Text = "(Opcional)codigo";
             // 
-            // Btn_Cerrar
+            // Lb_Correo
             // 
-            this.Btn_Cerrar.Location = new System.Drawing.Point(348, 356);
-            this.Btn_Cerrar.Name = "Btn_Cerrar";
-            this.Btn_Cerrar.Size = new System.Drawing.Size(94, 23);
-            this.Btn_Cerrar.TabIndex = 12;
-            this.Btn_Cerrar.Text = "Cerrar programa";
-            this.Btn_Cerrar.UseVisualStyleBackColor = true;
-            this.Btn_Cerrar.Click += new System.EventHandler(this.Btn_Cerrar_Click);
+            this.Lb_Correo.AutoSize = true;
+            this.Lb_Correo.Location = new System.Drawing.Point(307, 76);
+            this.Lb_Correo.Name = "Lb_Correo";
+            this.Lb_Correo.Size = new System.Drawing.Size(0, 13);
+            this.Lb_Correo.TabIndex = 12;
+            // 
+            // Lb_ContraseñaOne
+            // 
+            this.Lb_ContraseñaOne.AutoSize = true;
+            this.Lb_ContraseñaOne.Location = new System.Drawing.Point(307, 166);
+            this.Lb_ContraseñaOne.Name = "Lb_ContraseñaOne";
+            this.Lb_ContraseñaOne.Size = new System.Drawing.Size(0, 13);
+            this.Lb_ContraseñaOne.TabIndex = 14;
+            // 
+            // Lb_ContraseñaTwo
+            // 
+            this.Lb_ContraseñaTwo.AutoSize = true;
+            this.Lb_ContraseñaTwo.Location = new System.Drawing.Point(307, 203);
+            this.Lb_ContraseñaTwo.Name = "Lb_ContraseñaTwo";
+            this.Lb_ContraseñaTwo.Size = new System.Drawing.Size(0, 13);
+            this.Lb_ContraseñaTwo.TabIndex = 15;
+            // 
+            // Lb_MismaContraseña
+            // 
+            this.Lb_MismaContraseña.AutoSize = true;
+            this.Lb_MismaContraseña.Location = new System.Drawing.Point(460, 203);
+            this.Lb_MismaContraseña.Name = "Lb_MismaContraseña";
+            this.Lb_MismaContraseña.Size = new System.Drawing.Size(0, 13);
+            this.Lb_MismaContraseña.TabIndex = 16;
             // 
             // Interfaz_Registro
             // 
@@ -160,7 +190,10 @@ namespace Interface
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
-            this.Controls.Add(this.Btn_Cerrar);
+            this.Controls.Add(this.Lb_MismaContraseña);
+            this.Controls.Add(this.Lb_ContraseñaTwo);
+            this.Controls.Add(this.Lb_ContraseñaOne);
+            this.Controls.Add(this.Lb_Correo);
             this.Controls.Add(this.Txt_CodigoAdmin);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.Txt_NuevaContraseñaTwo);
@@ -195,6 +228,9 @@ namespace Interface
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox Txt_CodigoAdmin;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button Btn_Cerrar;
+        private System.Windows.Forms.Label Lb_Correo;
+        private System.Windows.Forms.Label Lb_ContraseñaOne;
+        private System.Windows.Forms.Label Lb_ContraseñaTwo;
+        private System.Windows.Forms.Label Lb_MismaContraseña;
     }
 }

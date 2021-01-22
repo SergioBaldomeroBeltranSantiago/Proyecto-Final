@@ -36,6 +36,8 @@ namespace Interface
             this.Txt_Contraseña = new System.Windows.Forms.TextBox();
             this.Lb_AquaTwo = new System.Windows.Forms.Label();
             this.Btn_Cerrar = new System.Windows.Forms.Button();
+            this.Lb_Correo = new System.Windows.Forms.Label();
+            this.Lb_Contraseña = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Btn_Registro
@@ -50,6 +52,7 @@ namespace Interface
             // 
             // Btn_InicioSesion
             // 
+            this.Btn_InicioSesion.Enabled = false;
             this.Btn_InicioSesion.Location = new System.Drawing.Point(368, 225);
             this.Btn_InicioSesion.Name = "Btn_InicioSesion";
             this.Btn_InicioSesion.Size = new System.Drawing.Size(94, 23);
@@ -61,7 +64,7 @@ namespace Interface
             // Lb_AquaOne
             // 
             this.Lb_AquaOne.AutoSize = true;
-            this.Lb_AquaOne.Location = new System.Drawing.Point(365, 99);
+            this.Lb_AquaOne.Location = new System.Drawing.Point(356, 101);
             this.Lb_AquaOne.Name = "Lb_AquaOne";
             this.Lb_AquaOne.Size = new System.Drawing.Size(100, 13);
             this.Lb_AquaOne.TabIndex = 2;
@@ -69,10 +72,11 @@ namespace Interface
             // 
             // Txt_CorreoE
             // 
-            this.Txt_CorreoE.Location = new System.Drawing.Point(362, 115);
+            this.Txt_CorreoE.Location = new System.Drawing.Point(353, 117);
             this.Txt_CorreoE.Name = "Txt_CorreoE";
             this.Txt_CorreoE.Size = new System.Drawing.Size(174, 20);
             this.Txt_CorreoE.TabIndex = 3;
+            this.Txt_CorreoE.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Txt_CorreoE_KeyUp);
             // 
             // Txt_Contraseña
             // 
@@ -80,6 +84,7 @@ namespace Interface
             this.Txt_Contraseña.Name = "Txt_Contraseña";
             this.Txt_Contraseña.Size = new System.Drawing.Size(121, 20);
             this.Txt_Contraseña.TabIndex = 4;
+            this.Txt_Contraseña.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Txt_Contraseña_KeyUp);
             // 
             // Lb_AquaTwo
             // 
@@ -100,12 +105,30 @@ namespace Interface
             this.Btn_Cerrar.UseVisualStyleBackColor = true;
             this.Btn_Cerrar.Click += new System.EventHandler(this.Btn_Cerrar_Click);
             // 
+            // Lb_Correo
+            // 
+            this.Lb_Correo.AutoSize = true;
+            this.Lb_Correo.Location = new System.Drawing.Point(533, 120);
+            this.Lb_Correo.Name = "Lb_Correo";
+            this.Lb_Correo.Size = new System.Drawing.Size(0, 13);
+            this.Lb_Correo.TabIndex = 7;
+            // 
+            // Lb_Contraseña
+            // 
+            this.Lb_Contraseña.AutoSize = true;
+            this.Lb_Contraseña.Location = new System.Drawing.Point(486, 180);
+            this.Lb_Contraseña.Name = "Lb_Contraseña";
+            this.Lb_Contraseña.Size = new System.Drawing.Size(0, 13);
+            this.Lb_Contraseña.TabIndex = 8;
+            // 
             // Interfaz_Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.Lb_Contraseña);
+            this.Controls.Add(this.Lb_Correo);
             this.Controls.Add(this.Btn_Cerrar);
             this.Controls.Add(this.Lb_AquaTwo);
             this.Controls.Add(this.Txt_Contraseña);
@@ -131,5 +154,7 @@ namespace Interface
         private System.Windows.Forms.TextBox Txt_Contraseña;
         private System.Windows.Forms.Label Lb_AquaTwo;
         private System.Windows.Forms.Button Btn_Cerrar;
+        private System.Windows.Forms.Label Lb_Correo;
+        private System.Windows.Forms.Label Lb_Contraseña;
     }
 }
